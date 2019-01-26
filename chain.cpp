@@ -7,6 +7,7 @@
  * Destroys the current Chain. This function should ensure that
  * memory does not leak on destruction of a chain.
  */
+
 Chain::~Chain(){
   if(head_ == NULL);
   else if(head_ -> prev == head_ || head_ -> next == head_){
@@ -31,25 +32,25 @@ Chain::~Chain(){
  */
 void Chain::insertBack(const Block & ndata){
 	if(head_ == NULL){
-		head_ = new Node();
+		head_ = new Node(ndata);
 		head_->prev = head_;
 		head_->next = head_;
 	}
+
 	else if(head_-> prev == head_ && head_ -> next == head_){
 
-		head_->prev = new Node();
+		head_->prev = new Node(ndata);
 		head_->prev->next = head_;
 		head_->prev->prev = head_;
-		const head_->prev->data = ndata;
+		
 	}
 
 	else {
 
-		head_->prev->next = new Node();
+		head_->prev->next = new Node(ndata);
 		head_->prev->next->prev = head_->prev;
 		head_->prev = head_->prev->next;
-		head_->prev->next = head_;
-		const head_->prev->data = ndata;	
+		head_->prev->next = head_;	
 	}
 }
 /**
@@ -65,7 +66,7 @@ void Chain::insertBack(const Block & ndata){
  * 0 <= dist <= length, and 0 <= len <= length. 
  */
 void Chain::moveBack(int startPos, int len, int dist){
-  /* your code here */
+  
 }
 
 /**
@@ -89,8 +90,7 @@ void Chain::reverseSub(int pos1, int pos2){
   /* your code here */
 }
 
-/*
-* Modifies both the current chain and the "other" chain by removing
+/** Modifies both the current chain and the "other" chain by removing
 * nodes from the other chain and adding them between the nodes
 * of the current chain -- one "other" node between two current nodes --
 * until one of the two chains is exhausted.  Then the rest of the
