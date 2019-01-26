@@ -11,7 +11,6 @@
 Chain::~Chain(){
 	Chain::clear();
  	head_ = NULL;
-	length_ = NULL;
 	height_ = NULL;
 	width_ = NULL;
 }
@@ -59,7 +58,7 @@ void Chain::insertBack(const Block & ndata){
  */
 void Chain::moveBack(int startPos, int len, int dist){
 	if(startPos + len - 1 + dist > Chain::size()){
-		dist = length - startPos - len + 1; 
+		dist = Chain::size() - startPos - len + 1;
 	}
 		
 	Node * startNode = walk(head_, startPos);
@@ -142,6 +141,7 @@ void Chain::clear() {
       temp = NULL;
       clear();
   }
+  length_-=1;
 }
 
 /**
