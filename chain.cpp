@@ -8,7 +8,22 @@
  * memory does not leak on destruction of a chain.
  */
 Chain::~Chain(){
-  /* your code here */
+  if(head_ == NULL);
+  else if(head_ -> prev == head_ || head_ -> next == head_){
+      delete head_;
+      head_ = NULL;
+  }
+  else {
+      * Node temp = head_;
+      head_ = temp -> next;
+      head_ -> prev = temp -> prev;
+      delete temp;
+      temp = NULL;
+      ~Chain();
+  }
+
+
+
 }
 
 /**
@@ -18,7 +33,7 @@ Chain::~Chain(){
  * @param ndata The data to be inserted.
  */
 void Chain::insertBack(const Block & ndata){
-  /* your code here */
+
 }
 
 /**
