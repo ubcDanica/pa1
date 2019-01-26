@@ -9,19 +9,11 @@
  */
 
 Chain::~Chain(){
-  if(head_ == NULL);
-  else if(head_ -> prev == head_ || head_ -> next == head_){
-      delete head_;
-      head_ = NULL;
-  }
-  else {
-      Node * temp = head_;
-      head_ = temp -> next;
-      head_ -> prev = temp -> prev;
-      delete temp;
-      temp = NULL;
-      Chain:: ~Chain();
-  }
+	Chain::clear();
+ 	head_ = NULL;
+	length_ = NULL;
+	height_ = NULL;
+	width_ = NULL;
 }
 
 /**
@@ -66,7 +58,17 @@ void Chain::insertBack(const Block & ndata){
  * 0 <= dist <= length, and 0 <= len <= length. 
  */
 void Chain::moveBack(int startPos, int len, int dist){
-  
+	if(startPos + len - 1 + dist > Chain::size()){
+		dist = length - startPos - len + 1; 
+	}
+		
+	Node * startNode = head_;
+
+	for(int i = 0; i < startPos;i++){
+		startNode = head->next;
+	}
+	
+	if( 
 }
 
 /**
@@ -114,7 +116,18 @@ void Chain::weave(Chain & other) { // leaves other empty.
  * to zero.  After clear() the chain represents an empty chain.
  */
 void Chain::clear() {
-  /* your code here */
+  if(head_ -> prev == head_ || head_ -> next == head_){
+      delete head_;
+      head_ = NULL;
+  }
+  else {
+      Node * temp = head_;
+      head_ = temp -> next;
+      head_ -> prev = temp -> prev;
+      delete temp;
+      temp = NULL;
+      clear();
+  }
 }
 
 /**
