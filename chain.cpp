@@ -14,16 +14,13 @@ Chain::~Chain(){
       head_ = NULL;
   }
   else {
-      * Node temp = head_;
+      Node * temp = head_;
       head_ = temp -> next;
       head_ -> prev = temp -> prev;
       delete temp;
       temp = NULL;
-      ~Chain();
+      Chain:: ~Chain();
   }
-
-
-
 }
 
 /**
@@ -33,9 +30,28 @@ Chain::~Chain(){
  * @param ndata The data to be inserted.
  */
 void Chain::insertBack(const Block & ndata){
+	if(head_ == NULL){
+		head_ = new Node();
+		head_->prev = head_;
+		head_->next = head_;
+	}
+	else if(head_-> prev == head_ && head_ -> next == head_){
 
+		head_->prev = new Node();
+		head_->prev->next = head_;
+		head_->prev->prev = head_;
+		const head_->prev->data = ndata;
+	}
+
+	else {
+
+		head_->prev->next = new Node();
+		head_->prev->next->prev = head_->prev;
+		head_->prev = head_->prev->next;
+		head_->prev->next = head_;
+		const head_->prev->data = ndata;	
+	}
 }
-
 /**
  * Modifies the Chain by moving the subchain of len Nodes,
  * starting at position startPos, dist positions toward the
