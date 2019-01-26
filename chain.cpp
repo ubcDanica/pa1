@@ -63,12 +63,24 @@ void Chain::moveBack(int startPos, int len, int dist){
 	}
 		
 	Node * startNode = head_;
+	Node * distNode = head_;
+	Node * endNode = head_;
+	for(int i = 0; i < dist;i++){
+		if(i<startPos){
+			startNode = startNode->next;
+		}
 
-	for(int i = 0; i < startPos;i++){
-		startNode = head->next;
+		if(i<startPos+len-1){
+			endNode = endNode->next;
+		}
+		distNode = distNode->next;
 	}
-	
-	if( 
+
+	startNode = distNode->prev->next;
+
+	endNode = 
+		
+	 
 }
 
 /**
