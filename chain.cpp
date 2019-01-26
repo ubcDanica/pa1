@@ -97,7 +97,23 @@ void Chain::roll(int k){
  */
 void Chain::reverseSub(int pos1, int pos2){
   /* your code here */
+  if(pos1 == pos2){
+  }
+  else if(pos1 +1 == pos2){
+    roll(pos1);
+    Node* temp = head_->next;
+    head_->next = head_;
+    head_->next->next = temp->next;
+    head_->next->prev = temp;
+    head_->next->prev->prev = temp->prev->prev;
+
+  }
+  else{
+    reverseSub(pos1+1, pos2);
+
+  }
 }
+
 
 /** Modifies both the current chain and the "other" chain by removing
 * nodes from the other chain and adding them between the nodes
