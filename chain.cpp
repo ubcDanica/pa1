@@ -77,6 +77,15 @@ void Chain::moveBack(int startPos, int len, int dist){
  */
 void Chain::roll(int k){
   /* your code here */
+  if(length_>=2){
+    for(int i=0; i<k; i++){
+      head_->next = head_;
+      head_ = head_->prev;
+    }
+  }
+  else if(length_ == 1){
+    head_ = head_;
+  }
 }
 
 /**
