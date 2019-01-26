@@ -62,23 +62,16 @@ void Chain::moveBack(int startPos, int len, int dist){
 		dist = length - startPos - len + 1; 
 	}
 		
-	Node * startNode = head_;
-	Node * distNode = head_;
-	Node * endNode = head_;
-	for(int i = 0; i < dist;i++){
-		if(i<startPos){
-			startNode = startNode->next;
-		}
+	Node * startNode = walk(head_, startPos);
+	Node * sendNode = walk(startNode,len-1);
+	Node * distNode = walk(sendNode, dist);
 
-		if(i<startPos+len-1){
-			endNode = endNode->next;
-		}
-		distNode = distNode->next;
-	}
+	startNode -> prev -> next = sendNode -> next;
+	sendNode -> next -> prev = startNode -> prev; // let the Node before startPos beginning connect to the Node after ending
 
-	startNode = distNode->prev->next;
+	sendNode -> next = distNode -> next;
+	distNode -> next = startNode;
 
-	endNode = 
 		
 	 
 }
