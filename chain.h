@@ -60,7 +60,7 @@ public:
     */
    Chain(PNG & imIn, int cols);
 
-   /**
+   /**'
     * Copy constructor for a Chain. GIVEN
     * Since Chains allocate dynamic memory (i.e., they use "new", we
     * must define the Big Three). This depends on your implementation
@@ -76,7 +76,7 @@ public:
     * Part of the Big Three that we must define because the class
     * allocates dynamic memory. This depends on your implementation
     * of the copy and clear funtions.
-    * @see chain_given.cpp
+    * @see chain_given.cpp`
     *
     * @param rhs The right hand side of the assignment statement.
     */

@@ -9,19 +9,10 @@
  */
 
 Chain::~Chain(){
-  if(head_ == NULL);
-  else if(head_ -> prev == head_ || head_ -> next == head_){
-      delete head_;
-      head_ = NULL;
-  }
-  else {
-      Node * temp = head_;
-      head_ = temp -> next;
-      head_ -> prev = temp -> prev;
-      delete temp;
-      temp = NULL;
-      Chain:: ~Chain();
-  }
+	Chain::clear();
+ 	head_ = NULL;
+	height_ = NULL;
+	width_ = NULL;
 }
 
 /**
@@ -66,7 +57,22 @@ void Chain::insertBack(const Block & ndata){
  * 0 <= dist <= length, and 0 <= len <= length. 
  */
 void Chain::moveBack(int startPos, int len, int dist){
-  
+	if(startPos + len - 1 + dist > Chain::size()){
+		dist = Chain::size() - startPos - len + 1;
+	}
+		
+	Node * startNode = walk(head_, startPos);
+	Node * sendNode = walk(startNode,len-1);
+	Node * distNode = walk(sendNode, dist);
+
+	startNode -> prev -> next = sendNode -> next;
+	sendNode -> next -> prev = startNode -> prev; // let the Node before startPos beginning connect to the Node after ending
+
+	sendNode -> next = distNode -> next;
+	distNode -> next = startNode;
+
+		
+	 
 }
 
 /**
@@ -139,7 +145,19 @@ void Chain::weave(Chain & other) { // leaves other empty.
  * to zero.  After clear() the chain represents an empty chain.
  */
 void Chain::clear() {
-  /* your code here */
+  if(head_ -> prev == head_ || head_ -> next == head_){
+      delete head_;
+      head_ = NULL;
+  }
+  else {
+      Node * temp = head_;
+      head_ = temp -> next;
+      head_ -> prev = temp -> prev;
+      delete temp;
+      temp = NULL;
+      clear();
+  }
+  length_-=1;
 }
 
 /**
