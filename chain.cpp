@@ -226,6 +226,9 @@ void Chain::clear() {
       Node * temp = head_;
       head_ = temp -> next;
       head_ -> prev = temp -> prev;
+      head_ -> next = temp -> next -> next;
+      head_ -> next -> prev = head_;
+      head_ -> prev ->next = head_
       delete temp;
       temp = NULL;
       clear();
