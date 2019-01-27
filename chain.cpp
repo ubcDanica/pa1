@@ -157,14 +157,18 @@ void Chain::swap(int pos){
 */
 void Chain::weave(Chain & other) { // leaves other empty.
   int length;
+  int length_1 = this->size();
+  int length_2 = other.size();
+
   if(this->size()>other.size())
     length = this->size();
   else
     length = other.size();
+
   for(int i = 0; i<length;i++){
-	  if(i<this->size())
+	  if(i<length_1)
 	    this->roll(this->size()-1);
-	  if(i<other.size()) {
+	  if(i<length_2) {
         this->insertBack(other.head_->data);
         other.roll(other.size()-1);
       }
