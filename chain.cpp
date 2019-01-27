@@ -163,7 +163,7 @@ void Chain::weave(Chain & other) { // leaves other empty.
 
 }
 
-void Chain::weaveHelper(Chain::Node *& l1, Chain::Node& *& l2) {
+void Chain::weaveHelper(Chain::Node *& l1, Chain::Node *& l2) {
 	if(l1 == NULL);
 	else if(l2 == NULL);
 	else{
