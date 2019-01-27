@@ -198,4 +198,48 @@ void Chain::clear() {
  */
 void Chain::copy(Chain const& other) {
   /* your code here */
+/*  length_ = other.size();
+  width_ = other.width_;
+  height_ = other.height_;
+  
+  Node* curr = other.head_;
+  head_ = new Node(curr->data);
+  head_->next = head_;
+  head_->prev = head_;
+
+  
+  for(int i=0; i<length_; i++){
+    head_->prev->next = new Node(curr->data);
+    head_->prev->next->prev = head_->prev;
+    head_->prev = head_->prev->next;
+    head_->prev->next = head_;   
+
+    head_ = head_ ->next;
+    curr = curr ->next;
+  }*/
+  
+
+  length_ = other.size();
+  width_ = other.width_;
+  height_ = other.height_;
+  
+  Node* curr = other.head_;
+  head_ = new Node(curr->data);
+  head_->next = head_;
+  head_->prev = head_;
+
+  Node* newCurr = head_;
+
+  
+  for(int i=0; i<length_ ; i++){
+    newCurr = newCurr ->next;
+    curr = curr ->next;
+
+    newCurr->next->prev = new Node(curr->data);
+    newCurr->next->prev->next = newCurr->next;
+    newCurr->next->prev->prev = newCurr;
+    newCurr->next = newCurr->next->prev;
+
+  }
+
 }

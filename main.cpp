@@ -57,6 +57,25 @@ if (expected3 == result3) cout<< "reverseEasy passed" << endl;
 PNG expected3r; expected3r.readFromFile("images/given-reverseEasyReverse.png");
 if (expected3r == result3r) cout<< "reverseEasyReverse passed" << endl;
 
+   
+
+
+
+   PNG png2;
+   png2.readFromFile("images/given-blocktest.png");
+  Chain i(png2,5);
+  Chain h(i);
+  PNG result10 = h.render(5);
+   result10.writeToFile("images/copy.png");
+
+PNG expected10; expected10.readFromFile("images/given-blocktest.png");
+if (expected10 == result10) cout<< "copy passed" << endl;
+
+   
+
+
+
+
    Chain e(png1,36);
    Chain g(e); // quick test of copy constructor
    Chain f(result1,36);
