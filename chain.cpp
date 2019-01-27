@@ -58,6 +58,7 @@ void Chain::insertBack(const Block & ndata){
  */
 
 void Chain::moveBack(int startPos, int len, int dist){
+<<<<<<< HEAD
   if(startPos + len - 1 + dist > length_){
     dist = length_ - startPos - len + 1;
     cout<< dist<< endl;
@@ -74,6 +75,26 @@ void Chain::moveBack(int startPos, int len, int dist){
   distNode -> next -> prev = sendNode;
   distNode -> next = startNode;
   startNode -> prev = distNode;
+=======
+	if(startPos + len - 1 + dist > length_){
+		dist = length_ - startPos - len + 1;
+		cout<< dist<< endl;
+	}
+	cout<< length_<<endl;		
+	Node * startNode = walk(head_, startPos);
+	Node * sendNode = walk(startNode,len-1);
+	Node * distNode = walk(sendNode, dist);
+
+	startNode -> prev -> next = sendNode -> next;
+	sendNode -> next -> prev = startNode -> prev; // let the Node before startPos beginning connect to the Node after ending
+
+	sendNode -> next = distNode -> next;
+	distNode -> next -> prev = sendNode;
+	distNode -> next = startNode;
+	startNode -> prev = distNode;
+		
+	 
+>>>>>>> f1bff2c7df3bf9adb118991d4f69c406e6d8c110
 }
 
 
