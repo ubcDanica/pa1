@@ -30,7 +30,8 @@ if (expected1 == result1) cout<< "block passed" << endl;
 
 //chain
    Chain c(png1,12); // img, number of strips.
-
+   PNG ownResult = c.render(12);
+   ownResult.writeToFile("images/out-insertBack.png");
    c.moveBack(3,5,4);
 
    PNG result2 = c.render(12);

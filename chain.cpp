@@ -33,7 +33,7 @@ void Chain::insertBack(const Block & ndata){
 		head_->prev = new Node(ndata);
 		head_->prev->next = head_;
 		head_->prev->prev = head_;
-		
+		head_->next = head_->prev;	
 	}
 
 	else {
@@ -43,6 +43,7 @@ void Chain::insertBack(const Block & ndata){
 		head_->prev = head_->prev->next;
 		head_->prev->next = head_;	
 	}
+	length_++;
 }
 /**
  * Modifies the Chain by moving the subchain of len Nodes,
@@ -57,10 +58,11 @@ void Chain::insertBack(const Block & ndata){
  * 0 <= dist <= length, and 0 <= len <= length. 
  */
 void Chain::moveBack(int startPos, int len, int dist){
-	if(startPos + len - 1 + dist > Chain::size()){
-		dist = Chain::size() - startPos - len + 1;
+	if(startPos + len - 1 + dist > length_){
+		dist = length_ - startPos - len + 1;
+		cout<< dist<< endl;
 	}
-		
+	cout<< length_<<endl;		
 	Node * startNode = walk(head_, startPos);
 	Node * sendNode = walk(startNode,len-1);
 	Node * distNode = walk(sendNode, dist);
