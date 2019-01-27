@@ -244,6 +244,9 @@ private:
    void swap(int pos);
 
    /* =================== end of private PA1 functions ============== */
+   void weaveHelper(Node*& l1, Node*& l2);
+   void insert(Node*& l1,Node* l2);
+   void remove(Node*& l2);
 };
 
 #endif
