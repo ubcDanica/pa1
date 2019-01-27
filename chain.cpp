@@ -163,10 +163,10 @@ void Chain::weave(Chain & other) { // leaves other empty.
     length = other.size();
   for(int i = 0; i<length;i++){
 	  if(i<this->size())
-	    this->roll(1);
+	    this->roll(this->size()-1);
 	  if(i<other.size()) {
         this->insertBack(other.head_->data);
-        other.roll(1);
+        other.roll(other.size()-1);
       }
   }
   other.clear();
