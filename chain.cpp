@@ -88,8 +88,21 @@ void Chain::roll(int k){
   /* your code here */
   if(length_>=2){
     for(int i=0; i<k; i++){
-      //head_->next = head_;
-      head_ = head_->prev;
+ /*     head_->next = head_;
+      head_ = head_->prev;*/
+      Node* next = head_->next;
+      Node* curr = head_;
+      Node* prev = head_->prev;
+      Node* prevPrev = head_->prev->prev;
+
+      //head_->next = curr;
+      head_= prev;
+
+      head_->prev = prevPrev;
+      prevPrev->next = head_;
+
+      head_->next = curr;
+      head_->next->prev = head_;
     }
   }
   else if(length_ == 1){
@@ -198,26 +211,6 @@ void Chain::clear() {
  */
 void Chain::copy(Chain const& other) {
   /* your code here */
-/*  length_ = other.size();
-  width_ = other.width_;
-  height_ = other.height_;
-  
-  Node* curr = other.head_;
-  head_ = new Node(curr->data);
-  head_->next = head_;
-  head_->prev = head_;
-
-  
-  for(int i=0; i<length_; i++){
-    head_->prev->next = new Node(curr->data);
-    head_->prev->next->prev = head_->prev;
-    head_->prev = head_->prev->next;
-    head_->prev->next = head_;   
-
-    head_ = head_ ->next;
-    curr = curr ->next;
-  }*/
-  
 
   length_ = other.size();
   width_ = other.width_;
@@ -241,5 +234,10 @@ void Chain::copy(Chain const& other) {
     newCurr->next = newCurr->next->prev;
 
   }
+
+  /*curr = NULL;
+  newCurr = NULL;
+  delete curr;
+  delete newCurr;*/
 
 }

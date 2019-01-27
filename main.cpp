@@ -63,13 +63,18 @@ if (expected3r == result3r) cout<< "reverseEasyReverse passed" << endl;
 
    PNG png2;
    png2.readFromFile("images/given-blocktest.png");
-  Chain i(png2,5);
+  Chain i(png2,15);
   Chain h(i);
-  PNG result10 = h.render(5);
+  PNG result10 = h.render(15);
    result10.writeToFile("images/copy.png");
 
 PNG expected10; expected10.readFromFile("images/given-blocktest.png");
 if (expected10 == result10) cout<< "copy passed" << endl;
+
+Chain x(png2,3);
+x.roll(1);
+PNG result11 = x.render(3);
+result11.writeToFile("images/roll.png");
 
    
 
