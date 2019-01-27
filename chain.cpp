@@ -175,7 +175,7 @@ void Chain::weaveHelper(Chain::Node *& l1, Chain::Node *& l2) {
 	}
 	else if(l1 == head_){
 	  insert(head_->prev, l2);
-	  remove(l2)
+	  remove(l2);
 	  weaveHelper(l1->prev,l2);
 	}
 
