@@ -169,14 +169,14 @@ void Chain::weave(Chain & other) { // leaves other empty.
 void Chain::weaveHelper(Chain::Node *& l1, Chain::Node *& l2) {
 	if(l2 == NULL);
 	else if(l1 -> next == head_){
-      insert(l1,l2);
-      remove(l2);
-      weaveHelper(l1->next,l2);
+     	  insert(l1,l2);
+     	  remove(l2);
+     	  weaveHelper(l1->next,l2);
 	}
-	else if(l1 == head_){
+	else if(l1->next->next== head_){
 	  insert(head_->prev, l2);
 	  remove(l2);
-	  weaveHelper(l1->prev,l2);
+	  weaveHelper(head_->prev,l2);
 	}
 
 	else{
