@@ -161,7 +161,7 @@ void Chain::weave(Chain & other) { // leaves other empty.
     length = this->size();
   else
     length = other.size();
-  while(int i = 0; i<length;i++){
+  for(int i = 0; i<length;i++){
 	  if(i<this->size())
 	    this->roll(1);
 	  if(i<other.size()) {
