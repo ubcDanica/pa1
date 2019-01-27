@@ -2,17 +2,16 @@
 #include "chain_given.cpp"
 
 // PA1 functions
-
 /**
  * Destroys the current Chain. This function should ensure that
  * memory does not leak on destruction of a chain.
  */
 
 Chain::~Chain(){
-	Chain::clear();
- 	head_ = NULL;
-	height_ = NULL;
-	width_ = NULL;
+  Chain::clear();
+  head_ = NULL;
+  height_ = NULL;
+  width_ = NULL;
 }
 
 /**
@@ -22,28 +21,29 @@ Chain::~Chain(){
  * @param ndata The data to be inserted.
  */
 void Chain::insertBack(const Block & ndata){
-	if(head_ == NULL){
-		head_ = new Node(ndata);
-		head_->prev = head_;
-		head_->next = head_;
-	}
+  if(head_ == NULL){
+    head_ = new Node(ndata);
+    head_->prev = head_;
+    head_->next = head_;
+  }
 
-	else if(head_-> prev == head_ && head_ -> next == head_){
+  else if(head_-> prev == head_ && head_ -> next == head_){
+    head_->prev = new Node(ndata);
+    head_->prev->next = head_;
+    head_->prev->prev = head_;
+    head_->next = head_->prev;  
+  }
 
-		head_->prev = new Node(ndata);
-		head_->prev->next = head_;
-		head_->prev->prev = head_;
-		
-	}
+  else {
 
-	else {
-
-		head_->prev->next = new Node(ndata);
-		head_->prev->next->prev = head_->prev;
-		head_->prev = head_->prev->next;
-		head_->prev->next = head_;	
-	}
+    head_->prev->next = new Node(ndata);
+    head_->prev->next->prev = head_->prev;
+    head_->prev = head_->prev->next;
+    head_->prev->next = head_;  
+  }
+  length_++;
 }
+
 /**
  * Modifies the Chain by moving the subchain of len Nodes,
  * starting at position startPos, dist positions toward the
@@ -56,8 +56,8 @@ void Chain::insertBack(const Block & ndata){
  * You may assume that: 1 <= startPos <= length - len + 1,
  * 0 <= dist <= length, and 0 <= len <= length. 
  */
-void Chain::moveBack(int startPos, int len, int dist){
 
+void Chain::moveBack(int startPos, int len, int dist){
   if(startPos + len - 1 + dist > length_){
     dist = length_ - startPos - len + 1;
     cout<< dist<< endl;
@@ -69,9 +69,14 @@ void Chain::moveBack(int startPos, int len, int dist){
 
   startNode -> prev -> next = sendNode -> next;
   sendNode -> next -> prev = startNode -> prev; // let the Node before startPos beginning connect to the Node after ending
+
   sendNode -> next = distNode -> next;
+  distNode -> next -> prev = sendNode;
   distNode -> next = startNode;
+  startNode -> prev = distNode;
 }
+
+
 
 /**
  * Rolls the current Chain by k nodes: reorders the current list
@@ -79,6 +84,7 @@ void Chain::moveBack(int startPos, int len, int dist){
  * nodes of the original list followed by the 1st, 2nd, ..., (n-k)th
  * nodes of the original list where n is the length.
  */
+
 void Chain::roll(int k){
   /* your code here */
   if(length_>=2){
@@ -101,25 +107,6 @@ void Chain::roll(int k){
  */
 void Chain::reverseSub(int pos1, int pos2){
   /* your code here */
-/*  if(pos1 == pos2){
-  }
-  else if(pos1 +1 == pos2){
-    swap(pos1);
-  }
-  else{
-    reverseSub(pos1+1, pos2);
-    reverseSub(pos,pos2-1);
-
-  }
-}
-
-void Chain::swap(int pos){
-    Node* block = walk(head_,pos1); 
-    Node* temp = block->next;
-    block->next = block;
-    block->next->next = temp->next;
-    block->next->prev = temp;
-    block->next->prev->prev = temp->prev->prev;*/
 }
 
 /** Modifies both the current chain and the "other" chain by removing
@@ -141,9 +128,13 @@ void Chain::weave(Chain & other) { // leaves other empty.
 
 
 /**
+
  * Destroys all dynamically allocated memory associated with the
+
  * current Chain class except for the sentinel head_. Sets length_
+
  * to zero.  After clear() the chain represents an empty chain.
+
  */
 void Chain::clear() {
   if(head_ -> prev == head_ || head_ -> next == head_){
@@ -168,6 +159,7 @@ void Chain::clear() {
  * independent. This function is used in both the copy
  * constructor and the assignment operator for Chains.
  */
+
 void Chain::copy(Chain const& other) {
   /* your code here */
 }
