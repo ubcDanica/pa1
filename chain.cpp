@@ -189,8 +189,9 @@ void Chain::weaveHelper(Chain::Node *& l1, Chain::Node *& l2) {
 void Chain::insert(Chain::Node *& l1, Chain::Node * l2) {
   l1->next->prev = new Node(l2->data);
   l1->next->prev->next = l1->next;
-  l1->next->prev->prev = l1;
   l1->next = l1->next->prev;
+  l1->next->prev = l1;
+
 }
 
 void Chain::remove(Chain::Node *& l2) {
