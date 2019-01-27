@@ -2,6 +2,7 @@
 #include "chain_given.cpp"
 
 // PA1 functions
+
 /**
  * Destroys the current Chain. This function should ensure that
  * memory does not leak on destruction of a chain.
@@ -28,6 +29,7 @@ void Chain::insertBack(const Block & ndata){
   }
 
   else if(head_-> prev == head_ && head_ -> next == head_){
+
     head_->prev = new Node(ndata);
     head_->prev->next = head_;
     head_->prev->prev = head_;
@@ -43,7 +45,6 @@ void Chain::insertBack(const Block & ndata){
   }
   length_++;
 }
-
 /**
  * Modifies the Chain by moving the subchain of len Nodes,
  * starting at position startPos, dist positions toward the
@@ -56,9 +57,7 @@ void Chain::insertBack(const Block & ndata){
  * You may assume that: 1 <= startPos <= length - len + 1,
  * 0 <= dist <= length, and 0 <= len <= length. 
  */
-
 void Chain::moveBack(int startPos, int len, int dist){
-<<<<<<< HEAD
   if(startPos + len - 1 + dist > length_){
     dist = length_ - startPos - len + 1;
     cout<< dist<< endl;
@@ -75,29 +74,9 @@ void Chain::moveBack(int startPos, int len, int dist){
   distNode -> next -> prev = sendNode;
   distNode -> next = startNode;
   startNode -> prev = distNode;
-=======
-	if(startPos + len - 1 + dist > length_){
-		dist = length_ - startPos - len + 1;
-		cout<< dist<< endl;
-	}
-	cout<< length_<<endl;		
-	Node * startNode = walk(head_, startPos);
-	Node * sendNode = walk(startNode,len-1);
-	Node * distNode = walk(sendNode, dist);
-
-	startNode -> prev -> next = sendNode -> next;
-	sendNode -> next -> prev = startNode -> prev; // let the Node before startPos beginning connect to the Node after ending
-
-	sendNode -> next = distNode -> next;
-	distNode -> next -> prev = sendNode;
-	distNode -> next = startNode;
-	startNode -> prev = distNode;
-		
-	 
->>>>>>> f1bff2c7df3bf9adb118991d4f69c406e6d8c110
+    
+   
 }
-
-
 
 /**
  * Rolls the current Chain by k nodes: reorders the current list
@@ -105,7 +84,6 @@ void Chain::moveBack(int startPos, int len, int dist){
  * nodes of the original list followed by the 1st, 2nd, ..., (n-k)th
  * nodes of the original list where n is the length.
  */
-
 void Chain::roll(int k){
   /* your code here */
   if(length_>=2){
@@ -144,18 +122,22 @@ void Chain::reverseSub(int pos1, int pos2){
 * cout << "Block sizes differ." << endl;
 */
 void Chain::weave(Chain & other) { // leaves other empty.
-  /* your code here */
+/*  if(size()==0);
+
+  else if(other.size() == 0);
+
+  else {
+    insert_after(list1, list1->key, list2->key);
+    remove(list2, list2 -> key);
+    interleave(list1->next->next,list2);
+  }*/
 }
 
 
 /**
-
  * Destroys all dynamically allocated memory associated with the
-
  * current Chain class except for the sentinel head_. Sets length_
-
  * to zero.  After clear() the chain represents an empty chain.
-
  */
 void Chain::clear() {
   if(head_ -> prev == head_ || head_ -> next == head_){
@@ -180,7 +162,6 @@ void Chain::clear() {
  * independent. This function is used in both the copy
  * constructor and the assignment operator for Chains.
  */
-
 void Chain::copy(Chain const& other) {
   /* your code here */
 }
