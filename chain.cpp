@@ -57,7 +57,7 @@ void Chain::insertBack(const Block & ndata){
  * 0 <= dist <= length, and 0 <= len <= length. 
  */
 void Chain::moveBack(int startPos, int len, int dist){
-	if(startPos + len - 1 + dist > Chain::size()){
+/*	if(startPos + len - 1 + dist > Chain::size()){
 		dist = Chain::size() - startPos - len + 1;
 	}
 		
@@ -70,7 +70,7 @@ void Chain::moveBack(int startPos, int len, int dist){
 
 	sendNode -> next = distNode -> next;
 	distNode -> next = startNode;
-
+*/
 		
 	 
 }
@@ -106,20 +106,23 @@ void Chain::reverseSub(int pos1, int pos2){
   if(pos1 == pos2){
   }
   else if(pos1 +1 == pos2){
-    roll(pos1);
-    Node* temp = head_->next;
-    head_->next = head_;
-    head_->next->next = temp->next;
-    head_->next->prev = temp;
-    head_->next->prev->prev = temp->prev->prev;
-
+    swap(pos1);
   }
   else{
     reverseSub(pos1+1, pos2);
+    reverseSub(pos,pos2-1);
 
   }
 }
 
+void Chain::swap(int pos){
+    Node* block = walk(head_,pos1); 
+    Node* temp = block->next;
+    block->next = block;
+    block->next->next = temp->next;
+    block->next->prev = temp;
+    block->next->prev->prev = temp->prev->prev;
+}
 
 /** Modifies both the current chain and the "other" chain by removing
 * nodes from the other chain and adding them between the nodes
