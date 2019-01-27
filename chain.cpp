@@ -168,7 +168,8 @@ void Chain::weave(Chain & other) { // leaves other empty.
         this->insertBack(other.head_->data);
         other.roll(1);
       }
-	}
+  }
+  other.clear();
 }
 
 
