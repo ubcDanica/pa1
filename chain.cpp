@@ -156,15 +156,38 @@ void Chain::swap(int pos){
 * cout << "Block sizes differ." << endl;
 */
 void Chain::weave(Chain & other) { // leaves other empty.
-/*  if(size()==0);
+	Node * l1 = head_;
+	Node * l2 = other.head_;
 
-  else if(other.size() == 0);
+	weaveHelper(l1,l2);
 
-  else {
-    insert_after(list1, list1->key, list2->key);
-    remove(list2, list2 -> key);
-    interleave(list1->next->next,list2);
-  }*/
+}
+
+void Chain::weaveHelper(Chain::Node *l1, Chain::Node *l2) {
+	if(l1 == NULL);
+	else if(l2 == NULL);
+	else{
+	  insert(l1,l2);
+	  remove(l2);
+	  weaveHelper(l1->next->next, l2);
+	}
+}
+
+void Chain::insert(Chain::Node *& l1, Chain::Node * l2) {
+  l1->next->prev = new Node(l2->data);
+  l1->next->prev->next = l1->next;
+  l1->next->prev->prev = l1;
+  l1->next = l1->next->prev;
+}
+
+void Chain::remove(Chain::Node *& l2) {
+  l2 -> prev -> next = l2 -> next;
+  l2-> next -> prev = l2 -> prev;
+  Node * temp = l2;
+  l2 = l2 ->next;
+  delete temp;
+  temp = NULL;
+
 }
 
 
