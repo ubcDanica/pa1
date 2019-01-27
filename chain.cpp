@@ -88,7 +88,7 @@ void Chain::roll(int k){
   /* your code here */
   if(length_>=2){
     for(int i=0; i<k; i++){
-      head_->next = head_;
+      //head_->next = head_;
       head_ = head_->prev;
     }
   }
@@ -105,8 +105,42 @@ void Chain::roll(int k){
  * The positions are 1-based.
  */
 void Chain::reverseSub(int pos1, int pos2){
-  /* your code here */
+
+  if(pos1 == pos2){
+
+  }
+  else if(pos1+1 == pos2){
+    swap(pos1);
+
+  }
+  else{
+    for(int i=pos2; i>pos1; i--){
+      for(int j=pos1; j<i; j++)
+      swap(j);
+    }
+  }
 }
+
+void Chain::swap(int pos){
+    Node* block = walk(head_,pos); 
+    Node* next = block->next;
+    Node* prev = block->prev;
+    Node* nextNext = block->next->next;
+
+    block->prev = next;
+    block->next = nextNext;
+    next->prev = prev;
+    next->next = block;
+    prev->next = next;
+    nextNext->prev = block;
+
+/*    block->next = block;
+    block->next->next = temp->next;
+    block->next->prev = temp;
+    block->next->prev->prev = temp->prev->prev;*/
+  }
+
+
 
 /** Modifies both the current chain and the "other" chain by removing
 * nodes from the other chain and adding them between the nodes

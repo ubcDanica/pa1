@@ -241,6 +241,8 @@ private:
     */
    void copy(const Chain & other);
 
+   void swap(int pos);
+
    /* =================== end of private PA1 functions ============== */
 };
 
