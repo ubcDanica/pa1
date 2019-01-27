@@ -71,9 +71,9 @@ void Chain::moveBack(int startPos, int len, int dist){
 	sendNode -> next -> prev = startNode -> prev; // let the Node before startPos beginning connect to the Node after ending
 
 	sendNode -> next = distNode -> next;
-	disNode -> next -> prev = sendNode;
+	distNode -> next -> prev = sendNode;
 	distNode -> next = startNode;
-
+	startNode -> prev = distNode;
 		
 	 
 }
