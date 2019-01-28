@@ -68,17 +68,13 @@ void Chain::moveBack(int startPos, int len, int dist){
  * nodes of the original list where n is the length.
  */
 void Chain::roll(int k){
-  /* your code here */
-  if(length_>=2){
+  /*if(length_>=2){
     for(int i=0; i<k; i++){
- /*     head_->next = head_;
-      head_ = head_->prev;*/
       Node* next = head_->next;
       Node* curr = head_;
       Node* prev = head_->prev;
       Node* prevPrev = head_->prev->prev;
 
-      //head_->next = curr;
       head_= prev;
 
       head_->prev = prevPrev;
@@ -90,7 +86,8 @@ void Chain::roll(int k){
   }
   else if(length_ == 1){
     head_ = head_;
-  }
+  }*/
+  moveBack(0,k,length_-k);
 }
 
 /**
@@ -163,13 +160,12 @@ void Chain::weave(Chain & other) { // leaves other empty.
 
   for(int i = 0; i<length;i++){
 	  if(i<length_1)
-	    this->roll(this->size()-1);
+	    this->roll(1);
 	  if(i<length_2) {
         this->insertBack(other.head_->data);
-        other.roll(other.size()-1);
+        other.roll(1);
       }
   }
-  other.clear();
 }
 
 
