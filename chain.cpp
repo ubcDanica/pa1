@@ -207,9 +207,6 @@ void Chain::copy(Chain const& other) {
   height_ = other.height_;
   
   Node* curr = other.head_;
-  head_ = new Node(curr->data);
-  head_->next = head_;
-  head_->prev = head_;
 
   Node* newCurr = head_;
 
@@ -224,4 +221,5 @@ void Chain::copy(Chain const& other) {
     newCurr->next = newCurr->next->prev;
 
   }
+
 }
