@@ -28,13 +28,13 @@ void Chain::insertBack(const Block & ndata){
     head_->next = head_;
   }
 
-  else if(head_-> prev == head_ && head_ -> next == head_ && head_-> data == NULL){
+  else if(head_-> prev == head_ && head_ -> next == head_ && head_-> data.height() == NULL){
       head_ = new Node(ndata);
       head_->prev = head_;
       head_->next = head_;
   }
 
-  else if(head_-> prev == head_ && head_ -> next == head_ && head_-> data != NULL){
+  else if(head_-> prev == head_ && head_ -> next == head_ && head_-> data.height() != NULL){
       head_->prev = new Node(ndata);
       head_->prev->next = head_;
       head_->prev->prev = head_;
