@@ -45,6 +45,7 @@ void Chain::moveBack(int startPos, int len, int dist){
   if(startPos + len - 1 + dist > length_){
     dist = length_ - startPos - len + 1;
   }
+
   Node * startNode = walk(head_, startPos);
   Node * sendNode = walk(startNode,len-1);
   Node * distNode = walk(sendNode, dist);
@@ -161,6 +162,7 @@ void Chain::weave(Chain & other) { // leaves other empty.
           other.rollBack(1);
         }
     }
+    other.clear();
   }
 }
 
