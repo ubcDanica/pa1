@@ -22,30 +22,7 @@ Chain::~Chain(){
  * @param ndata The data to be inserted.
  */
 void Chain::insertBack(const Block & ndata){
-<<<<<<< HEAD
-  if(head_ == NULL){
-    head_ = new Node(ndata);
-    head_->prev = head_;
-    head_->next = head_;
-  }
 
-  else if(head_-> prev == head_ && head_ -> next == head_ && head_-> data == NULL){
-      head_ = new Node(ndata);
-      head_->prev = head_;
-      head_->next = head_;
-  }
-
-  else if(head_-> prev == head_ && head_ -> next == head_ && head_-> data == NULL){
-      head_->prev = new Node(ndata);
-      head_->prev->next = head_;
-      head_->prev->prev = head_;
-      head_->next = head_->prev;
-  }
-
-  else {
-
-=======
->>>>>>> f9aa94b8cddb1ba5d219477a3acb6543b4066ee2
     head_->prev->next = new Node(ndata);
     head_->prev->next->prev = head_->prev;
     head_->prev = head_->prev->next;
@@ -67,9 +44,7 @@ void Chain::insertBack(const Block & ndata){
 void Chain::moveBack(int startPos, int len, int dist){
   if(startPos + len - 1 + dist > length_){
     dist = length_ - startPos - len + 1;
-    cout<< dist<< endl;
   }
-  cout<< length_<<endl;   
   Node * startNode = walk(head_, startPos);
   Node * sendNode = walk(startNode,len-1);
   Node * distNode = walk(sendNode, dist);
@@ -92,26 +67,21 @@ void Chain::moveBack(int startPos, int len, int dist){
  * nodes of the original list where n is the length.
  */
 void Chain::roll(int k){
-  /*if(length_>=2){
-    for(int i=0; i<k; i++){
-      Node* next = head_->next;
-      Node* curr = head_;
-      Node* prev = head_->prev;
-      Node* prevPrev = head_->prev->prev;
 
-      head_= prev;
+  for(int i=0;i<k;i++){
+    Node* next = head_->next;
+    Node* prev = head_->prev;
+    Node* prevPrev = head_->prev->prev;
 
-      head_->prev = prevPrev;
-      prevPrev->next = head_;
+    head_->prev = prevPrev;
+    prevPrev->next = head_;
 
-      head_->next = curr;
-      head_->next->prev = head_;
-    }
+    prev->prev = head_;
+    head_->next = prev;
+
+    prev->next = next;
+    next->prev = prev;
   }
-  else if(length_ == 1){
-    head_ = head_;
-  }*/
-  moveBack(1,k,length_-k);
 }
 
 /**
@@ -151,10 +121,6 @@ void Chain::swap(int pos){
     prev->next = next;
     nextNext->prev = block;
 
-/*    block->next = block;
-    block->next->next = temp->next;
-    block->next->prev = temp;
-    block->next->prev->prev = temp->prev->prev;*/
   }
 
 
@@ -173,64 +139,34 @@ void Chain::swap(int pos){
 * cout << "Block sizes differ." << endl;
 */
 void Chain::weave(Chain & other) { // leaves other empty.
-  int length;
-  int length_1 = this->size();
-  int length_2 = other.size();
+  if(this->width_!=other.width_ || this->height_!=other.height_){
+    cout<< "Block sizes differ." << endl;
+  }
 
-  if(this->size()>other.size())
-    length = this->size();
-  else
-    length = other.size();
+  else{
+    int length;
+    int length_1 = this->size();
+    int length_2 = other.size();
 
-  for(int i = 0; i<length;i++){
-	  if(i<length_1)
-	    this->roll(1);
-	  if(i<length_2) {
-        this->insertBack(other.head_->next->data);
-        other.roll(1);
-      }
+    if(this->size()>other.size())
+      length = this->size();
+    else
+      length = other.size();
+
+    for(int i = 0; i<length;i++){
+	   if(i<length_1)
+	      this->rollBack(1);
+	   if(i<length_2) {
+          this->insertBack(other.head_->next->data);
+          other.rollBack(1);
+        }
+    }
   }
 }
 
-
-void Chain::weaveHelper(Chain::Node *& l1, Chain::Node *& l2) {
-    if(l2 == NULL);
-	else if(l1 -> next == head_){
-     	  insert(l1,l2);
-     	  remove(l2);
-     	  weaveHelper(l1->next,l2);
-	}
-	else if(l1->next->next== head_){
-	  insert(head_->prev, l2);
-	  remove(l2);
-	  weaveHelper(head_->prev,l2);
-	}
-
-	else{
-	  insert(l1,l2);
-	  remove(l2);
-	  weaveHelper(l1->next->next, l2);
-	}
+void Chain::rollBack(int k){
+  moveBack(1,k,length_-k);
 }
-
-void Chain::insert(Chain::Node *& l1, Chain::Node * l2) {
-  l1->next->prev = new Node(l2->data);
-  l1->next->prev->next = l1->next;
-  l1->next = l1->next->prev;
-  l1->next->prev = l1;
-
-}
-
-void Chain::remove(Chain::Node *& l2) {
-  l2 -> prev -> next = l2 -> next;
-  l2-> next -> prev = l2 -> prev;
-  Node * temp = l2;
-  l2 = l2 ->next;
-  delete temp;
-  temp = NULL;
-
-}
-
 
 /**
  * Destroys all dynamically allocated memory associated with the
@@ -288,10 +224,4 @@ void Chain::copy(Chain const& other) {
     newCurr->next = newCurr->next->prev;
 
   }
-
-  /*curr = NULL;
-  newCurr = NULL;
-  delete curr;
-  delete newCurr;*/
-
 }
