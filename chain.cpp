@@ -22,33 +22,11 @@ Chain::~Chain(){
  * @param ndata The data to be inserted.
  */
 void Chain::insertBack(const Block & ndata){
-  if(head_ == NULL){
-    head_ = new Node(ndata);
-    head_->prev = head_;
-    head_->next = head_;
-  }
-
-  else if(head_-> prev == head_ && head_ -> next == head_ && head_-> data.height() == NULL){
-      head_ = new Node(ndata);
-      head_->prev = head_;
-      head_->next = head_;
-  }
-
-  else if(head_-> prev == head_ && head_ -> next == head_ && head_-> data.height() != NULL){
-      head_->prev = new Node(ndata);
-      head_->prev->next = head_;
-      head_->prev->prev = head_;
-      head_->next = head_->prev;
-  }
-
-  else {
-
     head_->prev->next = new Node(ndata);
     head_->prev->next->prev = head_->prev;
     head_->prev = head_->prev->next;
-    head_->prev->next = head_;  
-  }
-  length_++;
+    head_->prev->next = head_;
+    length_++;
 }
 /**
  * Modifies the Chain by moving the subchain of len Nodes,
