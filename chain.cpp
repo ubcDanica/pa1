@@ -87,7 +87,7 @@ void Chain::roll(int k){
   else if(length_ == 1){
     head_ = head_;
   }*/
-  moveBack(0,k,length_-k);
+  moveBack(1,k,length_-k);
 }
 
 /**
@@ -162,7 +162,7 @@ void Chain::weave(Chain & other) { // leaves other empty.
 	  if(i<length_1)
 	    this->roll(1);
 	  if(i<length_2) {
-        this->insertBack(other.head_->data);
+        this->insertBack(other.head_->next->data);
         other.roll(1);
       }
   }
