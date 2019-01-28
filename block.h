@@ -17,6 +17,7 @@ public:
    void greyscale();
    int width() const ;
    int height() const ;
+   //bool isEmpty() const;
 
 private:
 

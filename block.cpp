@@ -42,4 +42,12 @@ int Block::width() const{
 
 int Block::height() const{
 	return (int)data[0].size();
+
+/*bool Block::isEmpty() const{
+	if(width()==0 || height()==0){
+		return true;
+	}
+	else return false;
+}*/
+
 }
